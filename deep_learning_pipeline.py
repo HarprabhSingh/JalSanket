@@ -1,20 +1,103 @@
-from tensorflow.keras.models import load_model
+import tensorflow as tf
+import matplotlib.pyplot as plt
+import numpy as np
 import os
-from deep_learning_pipeline import Model_Pipeline
-import json
+import cv2
+import imghdr
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.metrics import Precision, Recall
+from tensorflow.keras.models import load_model
 
-model = load_model(os.path.join('model', 'water_problem_classifier.h5'))
-pipeline = Model_Pipeline()
-answer = pipeline.predict(model)
+
+class Model_Pipeline:
+    def __init__(self):
+        self.img_path = 'test_images'
+        self.img_extn = ['jpeg', 'JPEG', 'png', 'PNG' 'jpg', 'JPG', 'bmp', 'BMP']
+        self.image = None
+    
+    def load_image(self, path_of_img):
+        tip = imghdr.what(path_of_img)
+        
+        if tip not in self.img_extn:
+            input_image_path = path_of_img
+            
+            from PIL import Image
+            
+            # Open the non-JPG image
+            input_image = Image.open(input_image_path) 
+            
+            # Get the file name and extension from the input image path
+            file_name, file_extension = os.path.splitext(input_image_path)
+            
+            # Save as JPG with the same file name
+            output_image_path = f'{file_name}.jpg'
+            input_image.save(output_image_path, 'JPEG')
+        
+        self.image = cv2.imread(path_of_img)
+        # plt.imshow(self.image)
+    
+            
+    def resize_image(self, target_size=(256, 256)):
+        self.image = tf.image.resize(self.image, target_size)
+        
+    def get_prediction(self, yhat):
+        ct = 0
+        maxi = -1e20
+        i = -1
+        for ele in yhat[0]:
+            if ele > maxi:
+                i = ct
+                maxi = ele
+            ct = ct+1
+        return i
+    
+    def predict(self, model):
+        # Check if the image exist and is of correct format in jpg, png, bmp, jpeg.
+        image_exist = 0
+        
+        for image in os.listdir(os.path.join('test_images')):
+            img_path = os.path.join('test_images', image)
+            # print(img_path)
+            
+            if os.path.exists(img_path):
+                image_exist = 1
+                self.load_image(img_path)
+                
+                # Now we have the image, lets resize it.
+                self.resize_image()                
+                
+                # Now let's predict the image as a correct water problem.
+                yhat = model.predict(np.expand_dims(self.image/255, 0))
+                ans = self.get_prediction(yhat)
+                if(ans == 0):
+                    return "The image is of dirty pond/lake"
+                elif ans == 1:
+                    return "The image is of drainage"
+                elif ans == 2:
+                    return "The image is of flood"
+                else:
+                    return "The image is of burst pipe/infrastructure problem"
+            
+        if image_exist == 0:
+            print("No image present in the directory.")
+        
+    
+    
 
 
+# # In[18]:
 
-def get_json():
-    temp = {"result": answer}
-    return temp
-# file_name = 'temp.json'
-#
-# with open(file_name, "w") as json_file:
-#     json.dump(temp, json_file)
-# print('Data Written to Json file.')
-# print(type(os.path.join('temp.json')))
+
+# pipe = Model_Pipeline()
+# pipe.predict(test_new_model)
+# # print(pipe.image)
+
+
+# # In[20]:
+
+
+# import pickle
+# pickle.dump(pipe, open(os.path.join('model', 'pipeline.pkl'), 'wb'))
+
