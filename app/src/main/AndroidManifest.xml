@@ -28,7 +28,10 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBpVwrV38_ZJSS29dg_XaJUKolsVXEMS1A" />
+            android:value="AIzaSyAdSUgduHrbfZl_syRAGaecde1-9gvXeGo" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name=".MapsActivity"
