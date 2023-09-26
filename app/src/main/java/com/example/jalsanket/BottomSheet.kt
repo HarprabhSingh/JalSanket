@@ -1,6 +1,5 @@
 package com.example.jalsanket
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.jalsanket.data.FetchedData
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,6 +32,7 @@ class BottomSheet : BottomSheetDialogFragment() {
     private lateinit var customAdapter: customadapter // Declare the adapter as a property
     private lateinit var viewModel: ViewModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -46,13 +47,19 @@ class BottomSheet : BottomSheetDialogFragment() {
         // Initialize ViewModel
         viewModel = ViewModelProvider(this).get(ViewModel::class.java)
 
+
         // Observe the LiveData from the ViewModel
-        viewModel.dataList.observe(viewLifecycleOwner, Observer { dataList ->
-            // Update the RecyclerView adapter with the new data
-            customAdapter = customadapter(dataList)
-            recyclerView.adapter = customAdapter
-        })
+//        viewModel.dataList.observe(viewLifecycleOwner, Observer { dataList ->
+//            // Update the RecyclerView adapter with the new data
+//            customAdapter = customadapter(hardcodedData)
+//            recyclerView.adapter = customAdapter
+//        })
+        customAdapter = customadapter(hardcodedData)
+
+        // Set the adapter for the RecyclerView
+        recyclerView.adapter = customAdapter
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,23 +76,10 @@ class BottomSheet : BottomSheetDialogFragment() {
         return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BottomSheet.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BottomSheet().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    companion object{
+        val hardcodedData = mutableListOf(
+            FetchedData("Pond Contamination", "Dirty Water",28.7076717,77.1233681,0,null)
+            // Add more hardcoded items as needed
+        )
     }
 }

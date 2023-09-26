@@ -1,0 +1,8 @@
+<!-- res/drawable/circular_image_overlay.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/circular_background" />
+    <item>
+        <!-- Your circular image goes here -->
+        <bitmap android:src="@drawable/icon" /> <!-- Replace with your image resource -->
+    </item>
+</layer-list>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.fragment.app.FragmentContainerView
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -30,6 +30,7 @@
             android:text="@string/report_issue"
             android:textSize="24sp"
             android:layout_margin="20dp"
+            app:srcCompat="@drawable/report"
             android:contentDescription="@string/report_issue" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,6 +40,7 @@
             android:text="@string/issues_near_me"
             android:textSize="24sp"
             android:layout_margin="20dp"
+            app:srcCompat="@drawable/expand"
             android:contentDescription="@string/issues_near_me" />
     </LinearLayout>
 </RelativeLayout>

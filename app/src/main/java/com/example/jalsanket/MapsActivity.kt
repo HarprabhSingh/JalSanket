@@ -50,8 +50,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val mait = LatLng(28.719988044775363, 77.06606893832108)
-        mMap.addMarker(MarkerOptions().position(mait).title("Marker in MAIT"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mait))
+//        mMap.addMarker(MarkerOptions().position(mait).title("Marker in MAIT"))
+        for (data in BottomSheet.hardcodedData) {
+            val latLng = LatLng(data.latitude, data.longitude)
+            val markerTitle = data.title
+            val markerDescription = data.description
+
+            // Create a marker with title and description
+            val marker = MarkerOptions()
+                .position(latLng)
+                .title(markerTitle)
+                .snippet(markerDescription)
+
+            // Add the marker to the map
+            googleMap.addMarker(marker)
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+        }
+
     }
 }
