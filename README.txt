@@ -15,10 +15,13 @@ setup virtual environment:-
 
 You can see a (venv) created in your project directory and also the terminal must have been connected with the virtual environment venv. 
 
-STEP 3 : Installing all dependent python libraries. Use the below command in the same terminal :-
+STEP 3a : If you have followed step 1 then use the below command in the terminal keeping the virtual environment is active:-
 pip install -r requirements.txt
 
-STEP 4 : Open main.py and RUN it. You will see the output!!
+STEP 3b : If you have followed step 3a then skip this step. Otherwise, run the below command in the terminal keeping the virtual environment is active:-
+pip install tensorflow
+
+STEP 4 : Open virtualenvironment.py and RUN it. You will see the output!!
 
 NOTE 2 : You can also go through the notebook nb.ipynb to deep dive into the backend of the model.
 
