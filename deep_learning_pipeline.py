@@ -4,10 +4,6 @@ import numpy as np
 import os
 import cv2
 import imghdr
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.metrics import Precision, Recall
 from tensorflow.keras.models import load_model
 
 
@@ -53,6 +49,11 @@ class Model_Pipeline:
             ct = ct+1
         return i
     
+    def delete_test_images(self):
+        for image in os.listdir(os.path.join('test_images')):
+            img_path = img_path = os.path.join('test_images', image)
+            os.remove(img_path)
+            
     def predict(self, model):
         # Check if the image exist and is of correct format in jpg, png, bmp, jpeg.
         image_exist = 0
@@ -71,6 +72,7 @@ class Model_Pipeline:
                 # Now let's predict the image as a correct water problem.
                 yhat = model.predict(np.expand_dims(self.image/255, 0))
                 ans = self.get_prediction(yhat)
+                # self.delete_test_images()
                 if(ans == 0):
                     return "The image is of dirty pond/lake"
                 elif ans == 1:
@@ -81,23 +83,5 @@ class Model_Pipeline:
                     return "The image is of burst pipe/infrastructure problem"
             
         if image_exist == 0:
-            print("No image present in the directory.")
+            return "No image present in the directory."
         
-    
-    
-
-
-# # In[18]:
-
-
-# pipe = Model_Pipeline()
-# pipe.predict(test_new_model)
-# # print(pipe.image)
-
-
-# # In[20]:
-
-
-# import pickle
-# pickle.dump(pipe, open(os.path.join('model', 'pipeline.pkl'), 'wb'))
-
