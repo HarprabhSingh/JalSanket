@@ -15,10 +15,10 @@ setup virtual environment:-
 
 You can see a (venv) created in your project directory and also the terminal must have been connected with the virtual environment venv. 
 
-STEP 3a : If you have followed step 1 then use the below command in the terminal keeping the virtual environment is active:-
+STEP 3a : If you have followed step 1 then use the below command in the terminal keeping the virtual environment active:-
 pip install -r requirements.txt
 
-STEP 3b : If you have followed step 3a then skip this step. Otherwise, run the below command in the terminal keeping the virtual environment is active:-
+STEP 3b : If you have followed step 3a then skip this step. Otherwise, run the below command in the terminal keeping the virtual environment active:-
 pip install tensorflow
 
 STEP 4 : Open virtualenvironment.py and RUN it. You will see the output!!
