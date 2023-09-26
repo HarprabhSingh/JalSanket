@@ -9,6 +9,7 @@ import com.example.jalsanket.data.FetchedData
 
 class customadapter(private val Issue : List<FetchedData>): RecyclerView.Adapter<customadapter.ViewHolder>() {
 
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.titleIssue)
         val descriptionTextView: TextView = itemView.findViewById(R.id.description)
@@ -20,8 +21,10 @@ class customadapter(private val Issue : List<FetchedData>): RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val map = mapOf(0 to "Contaminated Pond/Lakes", 1 to "Drainage", 2 to "Flood", 3 to "Pipe Burst/Infrastructure Damage")
         val item = Issue[position]
-        holder.titleTextView.text = item.title
+        val resultString = map[item.result ?: 0] ?: "Unknown"
+        holder.titleTextView.text = resultString
         holder.descriptionTextView.text = item.description
     }
 

@@ -9,6 +9,20 @@
     tools:context=".MainActivity">
 
 
+    <ImageView
+        android:id="@+id/titleImage"
+        android:layout_width="140dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circular_background"
+        android:src="@drawable/icon"
+        app:layout_constraintBottom_toTopOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.153" />
+
     <EditText
         android:id="@+id/desc"
         android:layout_width="0dp"
@@ -49,10 +63,11 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
         style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="222dp"
+        android:layout_height="77dp"
         android:text="Click"
+        android:textSize="22sp"
         app:icon="@drawable/add_a_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
