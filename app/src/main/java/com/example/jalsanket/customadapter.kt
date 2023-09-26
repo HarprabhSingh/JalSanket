@@ -5,8 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.jalsanket.data.FetchedData
 
-class customadapter(private val Issue : List<issue>): RecyclerView.Adapter<customadapter.ViewHolder>() {
+class customadapter(private val Issue : List<FetchedData>): RecyclerView.Adapter<customadapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.titleIssue)
@@ -21,7 +22,7 @@ class customadapter(private val Issue : List<issue>): RecyclerView.Adapter<custo
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = Issue[position]
         holder.titleTextView.text = item.title
-        holder.descriptionTextView.text = item.desc
+        holder.descriptionTextView.text = item.description
     }
 
     override fun getItemCount(): Int {

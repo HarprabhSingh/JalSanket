@@ -1,5 +1,6 @@
 package com.example.jalsanket
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -29,6 +30,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val bottomSheetFragment = BottomSheet()
         binding.btnBottomSheet.setOnClickListener {
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+        }
+        binding.btnReport.setOnClickListener {
+            val intent = Intent(this@MapsActivity, Submission::class.java)
+            startActivity(intent)
         }
     }
 
